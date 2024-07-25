@@ -50,8 +50,11 @@ public TimesheetController(TimesheetService service){
     @PostMapping()  //создание нового ресурса
     public ResponseEntity<Timesheet> create(@RequestBody Timesheet timesheet){
         // Location: /timesheets/sequence
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(timesheet));
+        if(!service.create(timesheet).equals(null)) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(timesheet);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")  //удаление конкретного ресурса
