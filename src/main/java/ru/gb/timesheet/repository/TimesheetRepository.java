@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.timesheet.model.Timesheet;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +30,7 @@ public class TimesheetRepository {
 
     public Timesheet create(Timesheet timesheet){
         timesheet.setId(sequence++);
+        timesheet.setCreatedAt(LocalDate.now());
         timesheets.add(timesheet);
         return timesheet;
     }
