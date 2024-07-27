@@ -2,6 +2,7 @@ package ru.gb.timesheet.service;
 
 import org.springframework.stereotype.Service;
 import ru.gb.timesheet.model.Project;
+import ru.gb.timesheet.model.Timesheet;
 import ru.gb.timesheet.repository.ProjectRepository;
 
 import java.util.List;
@@ -31,5 +32,9 @@ public class ProjectService {
 
     public void delete(int id){
         repository.delete(id);
+    }
+
+    public List<Timesheet> findProjectTimesheets(long idProject){
+        return  repository.findProjectTimesheets(idProject);
     }
 }

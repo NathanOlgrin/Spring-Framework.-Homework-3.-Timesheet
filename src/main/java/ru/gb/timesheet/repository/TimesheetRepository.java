@@ -47,4 +47,12 @@ public class TimesheetRepository {
         timesheets.stream().filter(it -> Objects.equals(it.getId(), id)).findFirst().ifPresent(timesheets::remove);
     }
 
+    public List<Timesheet> findProjectTimesheet(long idProject){
+        List<Timesheet> projectTimesheets = new ArrayList<>();
+       timesheets.forEach(it -> {if(it.getProjectId()==idProject){
+           projectTimesheets.add(it);
+       }});
+        return projectTimesheets;
+    }
+
 }
