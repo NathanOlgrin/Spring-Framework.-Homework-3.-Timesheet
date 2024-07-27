@@ -2,6 +2,7 @@ package ru.gb.timesheet.repository;
 
 import org.springframework.stereotype.Repository;
 import ru.gb.timesheet.model.Project;
+import ru.gb.timesheet.model.Timesheet;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

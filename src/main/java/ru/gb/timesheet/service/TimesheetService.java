@@ -5,6 +5,7 @@ import ru.gb.timesheet.model.Timesheet;
 import ru.gb.timesheet.repository.ProjectRepository;
 import ru.gb.timesheet.repository.TimesheetRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,13 @@ public class TimesheetService {
 
     public void delete(Long id){
         repository.delete(id);
+    }
+
+    public List<Timesheet> getCreateAtAfter(LocalDate createAtAfter) {
+        return repository.createAtAfter(createAtAfter);
+    }
+
+    public List<Timesheet> getCreateAtBefore(LocalDate createAtBefore) {
+        return repository.createAtBefore(createAtBefore);
     }
 }

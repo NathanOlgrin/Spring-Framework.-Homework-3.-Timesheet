@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
+
+import static java.time.LocalDate.parse;
 
 @Repository //@Component для классов, работающих с данными
 public class TimesheetRepository {
@@ -47,4 +50,19 @@ public class TimesheetRepository {
         timesheets.stream().filter(it -> Objects.equals(it.getId(), id)).findFirst().ifPresent(timesheets::remove);
     }
 
+    public List<Timesheet> findProjectTimesheet(long idProject){
+        List<Timesheet> projectTimesheets = new ArrayList<>();
+       timesheets.forEach(it -> {if(it.getProjectId()==idProject){
+           projectTimesheets.add(it);
+       }});
+        return projectTimesheets;
+    }
+
+    public List<Timesheet> createAtAfter(LocalDate createAtAfter) {
+        return timesheets.stream().filter(it -> it.getCreatedAt().isAfter(createAtAfter)).toList();
+    }
+
+    public List<Timesheet> createAtBefore(LocalDate createAtBefore) {
+        return timesheets.stream().filter(it -> it.getCreatedAt().isBefore(createAtBefore)).toList();
+    }
 }
