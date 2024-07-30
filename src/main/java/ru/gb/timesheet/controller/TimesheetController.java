@@ -48,8 +48,8 @@ public TimesheetController(TimesheetService service){
         return ResponseEntity.status(HttpStatus.OK).body(service.getAll());
     }
 
-    @GetMapping()
-    public ResponseEntity <List<Timesheet>> getCreatAtAfter(@RequestParam LocalDate createAtAfter) {
+    @GetMapping("?createAtAfter")
+    public ResponseEntity <List<Timesheet>> getCreateAtAfter(@PathVariable LocalDate createAtAfter) {
         if (!service.getCreateAtAfter(createAtAfter).isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body((service.getCreateAtAfter(createAtAfter)));
         } else {
@@ -57,8 +57,8 @@ public TimesheetController(TimesheetService service){
         }
     }
 
-    @GetMapping()
-    public ResponseEntity <List<Timesheet>> getCreatAtBefore(@RequestParam LocalDate createAtBefore) {
+    @GetMapping("?createAtBefore")
+    public ResponseEntity <List<Timesheet>> getCreateAtBefore(@PathVariable LocalDate createAtBefore) {
         if (!service.getCreateAtBefore(createAtBefore).isEmpty()) {
             return ResponseEntity.status(HttpStatus.OK).body((service.getCreateAtBefore(createAtBefore)));
         } else {

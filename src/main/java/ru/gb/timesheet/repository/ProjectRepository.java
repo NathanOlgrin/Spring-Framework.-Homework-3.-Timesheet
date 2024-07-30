@@ -15,12 +15,6 @@ public class ProjectRepository {
     private static Long sequence = 1L;
     private final List<Project> projects = new ArrayList<>();
 
-    private final TimesheetRepository timesheetRepository;
-
-    public ProjectRepository(TimesheetRepository timesheetRepository) {
-        this.timesheetRepository = timesheetRepository;
-    }
-
     public Optional<Project> getById(Long id){
         return projects.stream().filter(it -> Objects.equals(it.getId(), id)).findFirst();
     }
@@ -38,9 +32,5 @@ public class ProjectRepository {
 
     public void delete(int id){
         projects.stream().filter(it -> Objects.equals(it.getId(), id)).findFirst().ifPresent(projects::remove);
-    }
-
-    public List<Timesheet> findProjectTimesheets(long idProject){
-         return timesheetRepository.findProjectTimesheet(idProject);
     }
 }

@@ -28,7 +28,7 @@ public class TimesheetPageController {
     // GET /home/timesheets/{id}
     @GetMapping("{id}")
     public String getTimesheetPage(@PathVariable Long id, Model model){
-        Optional<TimesheetPageDto> timesheetOpt = service.findbyId(id);
+        Optional<TimesheetPageDto> timesheetOpt = service.findById(id);
         if(timesheetOpt.isEmpty()){
             return "not-found.html";
         }

@@ -23,19 +23,12 @@
     <tbody>
     <tr th:each="timesheet : ${timesheets}">
         <td><span th:text="${timesheet.id}"></span></td>
-        <td><span th:text="${timesheet.projectName}"></span></td>
+        <td><a th:href="@{'/home/projects/{projectId}'(projectId=${timesheet.projectId})}"> <span th:text="${timesheet.projectName}"></span></a></td>
         <td><span th:text="${timesheet.minutes}"></span></td>
         <td><span th:text="${timesheet.createdAt}"></span></td>
         <td><a th:href="@{'/home/timesheets/{id}'(id=${timesheet.id})}">Ссылка на запись</a></td>
     </tr>
     </tbody>
 </table>
-
-
-<!--<h1>Запись рабочего времени # <span th:text="${timesheet.getId()}"></span></h1>-->
-<!--Минут потрачено: <span th:text="${timesheet.getMinutes()}"></span> <br>-->
-<!--Имя выполняемого проекта: <span th:text="${timesheet.getProjectName()}"></span> <br>-->
-<!--Дата создания: <span th:text="${timesheet.getCreatedAt()}"></span> <br>-->
-
 </body>
 </html>

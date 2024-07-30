@@ -16,7 +16,7 @@ public class TimesheetPageService {
 
     private final TimesheetService timesheetService;
     private final ProjectService projectService;
-    public Optional<TimesheetPageDto> findbyId(long id){
+    public Optional<TimesheetPageDto> findById(long id){
         return timesheetService.getById(id).map(this::convert);
     }
 
@@ -32,6 +32,7 @@ public class TimesheetPageService {
         timesheetPageDto.setMinutes(String.valueOf(timesheet.getMinutes()));
         timesheetPageDto.setCreatedAt(timesheet.getCreatedAt().toString());
         timesheetPageDto.setProjectName(project.getName());
+        timesheetPageDto.setProjectId(String.valueOf(project.getId()));
 
         return timesheetPageDto;
     }

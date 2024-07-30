@@ -31,7 +31,6 @@ public class TimesheetApplication {
 
 		for(int i = 1;i<=10;i++){
 			createdAt = createdAt.plusDays(1);
-			System.out.println(createdAt);
 
 			Timesheet timesheet = new Timesheet();
 			timesheet.setId((long) i);
