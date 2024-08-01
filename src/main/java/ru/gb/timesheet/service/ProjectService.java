@@ -7,7 +7,6 @@ import ru.gb.timesheet.repository.ProjectRepository;
 import ru.gb.timesheet.repository.TimesheetRepository;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -22,22 +21,22 @@ public class ProjectService {
     }
 
     public Optional<Project> getById(Long id){
-        return repository.getById(id);
+        return repository.findById(id);
     }
 
     public List<Project> getAll(){
-        return repository.getAll();
+        return repository.findAll();
     }
 
     public Project create(Project project){
-        return repository.create(project);
+        return repository.save(project);
     }
 
-    public void delete(int id){
-        repository.delete(id);
+    public void delete(Long id){
+        repository.deleteById(id);
     }
 
     public List<Timesheet> findProjectTimesheets(long idProject){
-        return timesheetRepository.findProjectTimesheet(idProject);
+        return timesheetRepository.findByProjectId(idProject);
     }
 }

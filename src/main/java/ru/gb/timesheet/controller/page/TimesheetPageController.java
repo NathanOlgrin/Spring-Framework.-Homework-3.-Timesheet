@@ -1,4 +1,4 @@
-package ru.gb.timesheet.controller;
+package ru.gb.timesheet.controller.page;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -6,7 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.gb.timesheet.service.TimesheetPageService;
+import ru.gb.timesheet.controller.dto.TimesheetPageDto;
+import ru.gb.timesheet.service.page.TimesheetPageService;
 
 import java.util.List;
 import java.util.Optional;

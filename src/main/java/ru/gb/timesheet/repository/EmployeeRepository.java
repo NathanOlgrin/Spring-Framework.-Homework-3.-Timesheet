@@ -2,9 +2,10 @@ package ru.gb.timesheet.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ru.gb.timesheet.model.Project;
+import ru.gb.timesheet.model.Employee;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Project, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+
 
 }

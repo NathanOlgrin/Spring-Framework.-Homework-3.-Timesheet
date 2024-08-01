@@ -2,7 +2,6 @@ package ru.gb.timesheet.service;
 
 import org.springframework.stereotype.Service;
 import ru.gb.timesheet.model.Timesheet;
-import ru.gb.timesheet.repository.ProjectRepository;
 import ru.gb.timesheet.repository.TimesheetRepository;
 
 import java.time.LocalDate;
@@ -18,26 +17,27 @@ public class TimesheetService {
     }
 
     public Optional<Timesheet> getById(Long id){
-        return repository.getById(id);
+        return repository.findById(id);
     }
 
     public List<Timesheet> getAll(){
-        return repository.getAll();
+        return repository.findAll();
     }
 
     public Timesheet create(Timesheet timesheet){
-            return repository.create(timesheet);
+            return repository.save(timesheet);
         }
 
     public void delete(Long id){
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
     public List<Timesheet> getCreateAtAfter(LocalDate createAtAfter) {
-        return repository.createAtAfter(createAtAfter);
+        return repository.findByCreatedAtGreaterThan(createAtAfter);
     }
 
     public List<Timesheet> getCreateAtBefore(LocalDate createAtBefore) {
-        return repository.createAtBefore(createAtBefore);
+        throw new UnsupportedOperationException();
+        //return repository.createAtBefore(createAtBefore);
     }
 }

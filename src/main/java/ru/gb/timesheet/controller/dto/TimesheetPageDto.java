@@ -1,4 +1,4 @@
-package ru.gb.timesheet.controller;
+package ru.gb.timesheet.controller.dto;
 
 import lombok.Data;
 
