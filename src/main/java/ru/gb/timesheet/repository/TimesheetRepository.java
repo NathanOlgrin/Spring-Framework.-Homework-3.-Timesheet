@@ -19,4 +19,7 @@ public interface TimesheetRepository extends JpaRepository<Timesheet, Long> {
     //select * from timesheet where created_at > $1
     List<Timesheet> findByCreatedAtGreaterThan(LocalDate createdAt);
 
+    //select * from timesheet where employee_id = $1
+    List<Timesheet> findByEmployeeId(Long employeeId);
+
 }

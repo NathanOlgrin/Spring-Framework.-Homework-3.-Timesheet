@@ -30,11 +30,10 @@ public class TimesheetApplication {
 			Project project = new Project();
 //			project.setId((long) i);
 			project.setName(UUID.randomUUID().toString());
-			projectRepository.save(project);
-		}
 
-		for(int i = 1; i<=20;i++){
+
 			Employee employee = new Employee();
+
 			Random random = new Random();
 			String firstName = random.ints(97, 123)
 					.limit(10)
@@ -46,7 +45,17 @@ public class TimesheetApplication {
 					.toString();
 			employee.setFirstName(firstName);
 			employee.setLastName(lastName);
+
+
+
+			projectRepository.save(project);
 			employeeRepository.save(employee);
+
+
+		}
+
+		for(int i = 1; i<=5;i++){
+
 		}
 
 		for(int i = 1;i<=10;i++){
@@ -57,6 +66,7 @@ public class TimesheetApplication {
 			timesheet.setCreatedAt(createdAt);
 			timesheet.setMinutes(ThreadLocalRandom.current().nextInt(100, 1000));
 			timesheet.setProjectId(ThreadLocalRandom.current().nextLong(1,6));
+			timesheet.setEmployeeId(ThreadLocalRandom.current().nextLong(1,6));
 			timesheetRepository.save(timesheet);
 		}
 	}

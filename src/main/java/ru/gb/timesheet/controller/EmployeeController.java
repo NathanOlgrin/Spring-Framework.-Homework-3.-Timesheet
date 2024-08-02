@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.gb.timesheet.model.Employee;
 import ru.gb.timesheet.model.Project;
+import ru.gb.timesheet.model.Timesheet;
 import ru.gb.timesheet.service.EmployeeService;
 
 import java.util.List;
@@ -43,5 +44,10 @@ public class EmployeeController {
     public  ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/timesheets")
+    public ResponseEntity<List<Timesheet>> findByEmployeeId(@PathVariable long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.findByEmployeeId(id));
     }
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Set;
+
 @Data
 @Entity
 @Table(name = "project")
@@ -15,4 +17,10 @@ public class Project {
     private Long id;
     private String name;
 
+    /*
+    @ManyToMany(mappedBy = "projectSet")
+    Set<Employee> employeeSet;
+
+    @OneToMany(mappedBy = "project")
+    Set<EmployeesProjects> key;*/
 }
