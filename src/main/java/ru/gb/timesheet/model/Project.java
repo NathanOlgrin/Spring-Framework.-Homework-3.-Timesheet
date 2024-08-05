@@ -19,7 +19,7 @@ public class Project {
 
     /*
     @ManyToMany(mappedBy = "projectSet")
-    Set<Employee> employeeSet;
+    Set<Project> projectSet;
 
     @OneToMany(mappedBy = "project")
     Set<EmployeesProjects> key;*/

@@ -1,5 +1,8 @@
 package ru.gb.timesheet.controller.page;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,11 +17,13 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/home/timesheets")
+@Tag(name = "Timesheets", description = "API Для работы с таймшитами")
 @RequiredArgsConstructor
 public class TimesheetPageController {
 
     private final TimesheetPageService service;
 
+    @Operation(summary = "Get All Timesheet", description = "Получить все таймшиты в отдельной html-странице")
     @GetMapping
     public String getAllTimeshees(Model model){
         List<TimesheetPageDto> timesheets = service.findAll();
@@ -27,8 +32,9 @@ public class TimesheetPageController {
     }
 
     // GET /home/timesheets/{id}
+    @Operation(summary = "Get Timesheet", description = "Получить таймшит по его идентификатору в отдельной html-странице")
     @GetMapping("{id}")
-    public String getTimesheetPage(@PathVariable Long id, Model model){
+    public String getTimesheetPage(@PathVariable @Parameter(description = "Идентификатор таймшита") Long id, Model model){
         Optional<TimesheetPageDto> timesheetOpt = service.findById(id);
         if(timesheetOpt.isEmpty()){
             return "not-found.html";
