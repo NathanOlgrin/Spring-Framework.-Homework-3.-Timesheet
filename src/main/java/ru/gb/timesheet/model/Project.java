@@ -17,10 +17,6 @@ public class Project {
     private Long id;
     private String name;
 
-    /*
-    @ManyToMany(mappedBy = "projectSet")
-    Set<Project> projectSet;
-
-    @OneToMany(mappedBy = "project")
+    /*@OneToMany(mappedBy = "project")
     Set<EmployeesProjects> key;*/
 }

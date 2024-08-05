@@ -1,10 +1,13 @@
 package ru.gb.timesheet.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+//@Data
 //@Entity
+//@Table(name = "employeeproject")
 public class EmployeesProjects {
-/*
+    /*
     @EmbeddedId
     EmployeesProjects id;
 
@@ -18,5 +21,5 @@ public class EmployeesProjects {
     @JoinColumn(name = "project_id")
     Project project;
 
-    int key;*/
+    Long key;*/
 }

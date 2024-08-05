@@ -17,15 +17,7 @@ public class Employee {
     private Long id;
     private String firstName;
     private String lastName;
-    /*
-    @ManyToMany
-            @JoinTable(
-                    name = "employee_projects",
-                    joinColumns = @JoinColumn(name = "employee_id"),
-                    inverseJoinColumns = @JoinColumn(name = "project_id")
-            )
-    Set<Project> projectSet;
 
-    @OneToMany(mappedBy = "employee")
+    /*@OneToMany(mappedBy = "employee")
     Set<EmployeesProjects> key;*/
 }

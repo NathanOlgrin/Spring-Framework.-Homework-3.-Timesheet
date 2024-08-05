@@ -12,6 +12,7 @@ import ru.gb.timesheet.repository.TimesheetRepository;
 
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -23,12 +24,14 @@ public class TimesheetApplication {
 		ProjectRepository projectRepository = context.getBean(ProjectRepository.class);
 		TimesheetRepository timesheetRepository = context.getBean(TimesheetRepository.class);
 		EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
+		//EmployeeProjectRepository employeeProjectRepository = context.getBean(EmployeeProjectRepository.class);
 
 		LocalDate createdAt = LocalDate.now();
 
+		//Long key = 1L;
+
 		for(int i = 1; i<=5; i++){
 			Project project = new Project();
-//			project.setId((long) i);
 			project.setName(UUID.randomUUID().toString());
 
 
@@ -45,18 +48,24 @@ public class TimesheetApplication {
 					.toString();
 			employee.setFirstName(firstName);
 			employee.setLastName(lastName);
+			/*
+			if(random.nextBoolean()){
+				EmployeesProjects employeesProjects = new EmployeesProjects();
+				employeesProjects.setEmployee(employee);
+				employeesProjects.setProject(project);
+				employeesProjects.setKey(key);
+				key++;
 
+				employeeProjectRepository.save(employeesProjects);
+			}
 
-
+			employee.setKey((Set<EmployeesProjects>) employeeProjectRepository);
+			project.setKey((Set<EmployeesProjects>) employeeProjectRepository);
+			*/
 			projectRepository.save(project);
 			employeeRepository.save(employee);
-
-
 		}
 
-		for(int i = 1; i<=5;i++){
-
-		}
 
 		for(int i = 1;i<=10;i++){
 			createdAt = createdAt.plusDays(1);
