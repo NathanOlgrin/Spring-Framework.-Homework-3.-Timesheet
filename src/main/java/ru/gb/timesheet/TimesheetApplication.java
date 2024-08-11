@@ -3,14 +3,11 @@ package ru.gb.timesheet;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-import ru.gb.timesheet.model.Employee;
-import ru.gb.timesheet.model.Project;
-import ru.gb.timesheet.model.Timesheet;
-import ru.gb.timesheet.repository.EmployeeRepository;
-import ru.gb.timesheet.repository.ProjectRepository;
-import ru.gb.timesheet.repository.TimesheetRepository;
+import ru.gb.timesheet.model.*;
+import ru.gb.timesheet.repository.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
@@ -24,7 +21,40 @@ public class TimesheetApplication {
 		ProjectRepository projectRepository = context.getBean(ProjectRepository.class);
 		TimesheetRepository timesheetRepository = context.getBean(TimesheetRepository.class);
 		EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
+		UserReposiroty userReposiroty = context.getBean(UserReposiroty.class);
+		UserRoleRepository userRoleRepository = context.getBean(UserRoleRepository.class);
 		//EmployeeProjectRepository employeeProjectRepository = context.getBean(EmployeeProjectRepository.class);
+
+		User admin = new User();
+		admin.setLogin("admin");
+		admin.setPassword("$2a$12$srFV5znyP.go2SErncePxeP0C2KMXfGckt4MtiQ98zynyC82G2xc2");  // admin
+
+		User user = new User();
+		user.setLogin("user");
+		user.setPassword("$2a$12$8O/uRM6t1S.eFtn7kiP/7ORKQVdGzootLxVwfHgQvsDd5WE6Ch.ri");   // user
+
+		User anonymous = new User();
+		anonymous.setLogin("anon");
+		anonymous.setPassword("$2a$12$Z1SdozWtqn2va7QeypZU4OVCnTq3YvrmmVAeLUbqaZamvlDKqKQg2"); //anon
+
+		admin = userReposiroty.save(admin);
+		user = userReposiroty.save(user);
+		anonymous = userReposiroty.save(anonymous);
+
+		UserRole adminAdminRole = new UserRole();
+		adminAdminRole.setUserId(admin.getId());
+		adminAdminRole.setRoleName(Role.ADMIN.getName());
+		userRoleRepository.save(adminAdminRole);
+
+		UserRole adminUserRole = new UserRole();
+		adminUserRole.setUserId(admin.getId());
+		adminUserRole.setRoleName(Role.USER.getName());
+		userRoleRepository.save(adminUserRole);
+
+		UserRole userRole = new UserRole();
+		userRole.setUserId(user.getId());
+		userRole.setRoleName(Role.USER.getName());
+		userRoleRepository.save(userRole);
 
 		LocalDate createdAt = LocalDate.now();
 
@@ -64,6 +94,7 @@ public class TimesheetApplication {
 			*/
 			projectRepository.save(project);
 			employeeRepository.save(employee);
+
 		}
 
 

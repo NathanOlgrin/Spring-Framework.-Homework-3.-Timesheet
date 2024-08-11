@@ -4,12 +4,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.gb.timesheet.controller.dto.TimesheetPageDto;
+import ru.gb.timesheet.model.Role;
 import ru.gb.timesheet.service.page.TimesheetPageService;
 
 import java.util.List;
@@ -19,6 +22,8 @@ import java.util.Optional;
 @RequestMapping("/home/timesheets")
 @Tag(name = "Timesheets", description = "API Для работы с таймшитами")
 @RequiredArgsConstructor
+//@PreAuthorize("hasRole(\"admin\")") //SPell - spring expression language
+//@Secured({"admin"})
 public class TimesheetPageController {
 
     private final TimesheetPageService service;
