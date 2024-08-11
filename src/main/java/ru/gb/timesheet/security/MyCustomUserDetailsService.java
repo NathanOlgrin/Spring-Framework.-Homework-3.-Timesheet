@@ -7,7 +7,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
+import ru.gb.timesheet.model.Roles;
 import ru.gb.timesheet.model.User;
+import ru.gb.timesheet.model.UserRole;
+import ru.gb.timesheet.repository.RolesReposiroty;
 import ru.gb.timesheet.repository.UserReposiroty;
 import ru.gb.timesheet.repository.UserRoleRepository;
 
@@ -26,13 +29,22 @@ public class MyCustomUserDetailsService implements UserDetailsService {
 
     private final UserReposiroty userReposiroty;
     private final UserRoleRepository userRoleRepository;
+    private final RolesReposiroty rolesReposiroty;
 
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userReposiroty.findByLogin(username).orElseThrow(()-> new UsernameNotFoundException("Пользователь не найден"));
+        List<UserRole> userRole = userRoleRepository.findByUserId(user.getId());
 
-        List<SimpleGrantedAuthority> userRoles = userRoleRepository.findByUserId(user.getId()).stream().map(it -> new SimpleGrantedAuthority(it.getRoleName())).toList();
+        List<Long> rolesId = new ArrayList<>();
+        for (UserRole ur: userRole) {
+            rolesId.add(ur.getRolesId());
+        }
+
+        List<Roles> roles = rolesReposiroty.findAllById(rolesId);
+
+        List<SimpleGrantedAuthority> userRoles = roles.stream().map(it -> new SimpleGrantedAuthority(it.getName())).toList();
 
                 //        TODO: использовать роли пользователя
         return new org.springframework.security.core.userdetails.User(

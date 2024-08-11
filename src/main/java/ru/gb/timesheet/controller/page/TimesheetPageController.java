@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.gb.timesheet.controller.dto.TimesheetPageDto;
-import ru.gb.timesheet.model.Role;
+import ru.gb.timesheet.model.Roles;
 import ru.gb.timesheet.service.page.TimesheetPageService;
 
 import java.util.List;

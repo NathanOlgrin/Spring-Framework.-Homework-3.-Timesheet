@@ -23,7 +23,8 @@ public class TimesheetApplication {
 		EmployeeRepository employeeRepository = context.getBean(EmployeeRepository.class);
 		UserReposiroty userReposiroty = context.getBean(UserReposiroty.class);
 		UserRoleRepository userRoleRepository = context.getBean(UserRoleRepository.class);
-		//EmployeeProjectRepository employeeProjectRepository = context.getBean(EmployeeProjectRepository.class);
+		RolesReposiroty rolesReposiroty = context.getBean(RolesReposiroty.class);
+		EmployeeProjectRepository employeeProjectRepository = context.getBean(EmployeeProjectRepository.class);
 
 		User admin = new User();
 		admin.setLogin("admin");
@@ -37,24 +38,46 @@ public class TimesheetApplication {
 		anonymous.setLogin("anon");
 		anonymous.setPassword("$2a$12$Z1SdozWtqn2va7QeypZU4OVCnTq3YvrmmVAeLUbqaZamvlDKqKQg2"); //anon
 
+		User rest = new User();
+		rest.setLogin("rest");
+		rest.setPassword("$2a$12$SyyokQSKJ6NuM/Y.ZMJjh./z57NB9KvGAC.dFISIuFJ9XbOUaOnmO"); //rest
+
 		admin = userReposiroty.save(admin);
 		user = userReposiroty.save(user);
 		anonymous = userReposiroty.save(anonymous);
+		rest = userReposiroty.save(rest);
+
+		Roles adminRoles = new Roles();
+		adminRoles.setName("admin");
+		rolesReposiroty.save(adminRoles);
+
+		Roles userRoles = new Roles();
+		userRoles.setName("user");
+		rolesReposiroty.save(userRoles);
+
+		Roles restRoles = new Roles();
+		restRoles.setName("rest");
+		rolesReposiroty.save(restRoles);
 
 		UserRole adminAdminRole = new UserRole();
 		adminAdminRole.setUserId(admin.getId());
-		adminAdminRole.setRoleName(Role.ADMIN.getName());
+		adminAdminRole.setRolesId(adminRoles.getId());
 		userRoleRepository.save(adminAdminRole);
 
 		UserRole adminUserRole = new UserRole();
 		adminUserRole.setUserId(admin.getId());
-		adminUserRole.setRoleName(Role.USER.getName());
+		adminUserRole.setRolesId(userRoles.getId());
 		userRoleRepository.save(adminUserRole);
 
 		UserRole userRole = new UserRole();
 		userRole.setUserId(user.getId());
-		userRole.setRoleName(Role.USER.getName());
+		userRole.setRolesId(userRoles.getId());
 		userRoleRepository.save(userRole);
+
+		UserRole userRestRoles = new UserRole();
+		userRestRoles.setUserId(rest.getId());
+		userRestRoles.setRolesId(restRoles.getId());
+		userRoleRepository.save(userRestRoles);
 
 		LocalDate createdAt = LocalDate.now();
 
@@ -78,20 +101,15 @@ public class TimesheetApplication {
 					.toString();
 			employee.setFirstName(firstName);
 			employee.setLastName(lastName);
-			/*
+
 			if(random.nextBoolean()){
 				EmployeesProjects employeesProjects = new EmployeesProjects();
-				employeesProjects.setEmployee(employee);
-				employeesProjects.setProject(project);
-				employeesProjects.setKey(key);
-				key++;
+				employeesProjects.setEmployeeId(employee.getId());
+				employeesProjects.setProjectId(project.getId());
 
 				employeeProjectRepository.save(employeesProjects);
 			}
 
-			employee.setKey((Set<EmployeesProjects>) employeeProjectRepository);
-			project.setKey((Set<EmployeesProjects>) employeeProjectRepository);
-			*/
 			projectRepository.save(project);
 			employeeRepository.save(employee);
 

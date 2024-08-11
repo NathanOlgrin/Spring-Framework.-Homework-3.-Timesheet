@@ -3,23 +3,19 @@ package ru.gb.timesheet.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-//@Data
-//@Entity
-//@Table(name = "employeeproject")
+@Data
+@Entity
+@Table(name = "employee_project")
 public class EmployeesProjects {
-    /*
-    @EmbeddedId
-    EmployeesProjects id;
 
-    @ManyToOne
-    @MapsId("employeeId")
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    Long id;
+
+
     @JoinColumn(name = "employee_id")
-    Employee employee;
+    Long employeeId;
 
-    @ManyToOne
-    @MapsId("projectId")
     @JoinColumn(name = "project_id")
-    Project project;
-
-    Long key;*/
+    Long projectId;
 }
