@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/home/projects/**").hasAuthority("admin")
 //                       .requestMatchers("/home/projects/**").hasRole("admin" //admin)
                         .requestMatchers("/home/timesheets/**").hasAnyAuthority("admin", "user")
-                        .requestMatchers("/timesheets/**").hasAnyAuthority("rest")
+                        .requestMatchers("/timesheets/**").hasAnyAuthority("admin", "rest")
                         .requestMatchers("/projects/**").hasAnyAuthority("rest")
                         .requestMatchers("/users/**").hasAnyAuthority("rest")
                         .anyRequest().authenticated())

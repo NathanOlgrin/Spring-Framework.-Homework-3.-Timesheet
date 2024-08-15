@@ -1,5 +1,6 @@
 package ru.gb.timesheet;
 
+import org.aspectj.lang.annotation.Aspect;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -14,6 +15,7 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
+@Aspect
 public class TimesheetApplication {
 
 	public static void main(String[] args) {
