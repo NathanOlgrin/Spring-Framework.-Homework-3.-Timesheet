@@ -28,31 +28,36 @@ public class LoggingAspect {
 //    Pointcut - Точка входа в аспект
     @Before(value = "timesheetServiceMethodPointcut()")
     public void beforeTimesheetServiceFindById(JoinPoint jp){
-        String methodName = jp.getSignature().getName();
-//        Long id = (Long) jp.getArgs()[0];
-        log.info("Before -> TimesheetService#{}", methodName);
+        if(jp.getArgs().length!=0){
+            String type = jp.getArgs()[0].getClass().getName();
+            log.info("Before -> TimesheetService#{}({} = {})", jp.getSignature().getName(), type, jp.getArgs()[0]);
+        } else {
+            log.info("Before -> TimesheetService#{}", jp.getSignature().getName());
+        }
     }
 
     @After(value = "timesheetServiceMethodPointcut()")
     public void afterTimesheetServiceFindById(JoinPoint jp){
-        String methodName = jp.getSignature().getName();
-//        Long id = (Long) jp.getArgs()[0];
-        log.info("After -> TimesheetService#{}", methodName);
+        if(jp.getArgs().length!=0){
+            String type = jp.getArgs()[0].getClass().getName();
+            log.info("After -> TimesheetService#{}({} = {})", jp.getSignature().getName(), type, jp.getArgs()[0]);
+        } else {
+            log.info("After -> TimesheetService#{}", jp.getSignature().getName());
+        }
     }
 
     @AfterReturning(value = "timesheetServiceMethodPointcut()")
     public void afterReturningTimesheetServiceFindById(JoinPoint jp){
-        String methodName = jp.getSignature().getName();
-//        Long id = (Long) jp.getArgs()[0];
-        log.info("AfterReturning -> TimesheetService#{}", methodName);
+        if(jp.getArgs().length!=0){
+            String type = jp.getArgs()[0].getClass().getName();
+            log.info("AfterReturning -> TimesheetService#{}({} = {})", jp.getSignature().getName(), type, jp.getArgs()[0]);
+        } else {
+            log.info("AfterReturning -> TimesheetService#{}", jp.getSignature().getName());
+        }
     }
 
     @AfterThrowing(value = "timesheetServiceMethodPointcut()", throwing = "ex")
     public void afterThrowingTimesheetServiceFindById(JoinPoint jp, Exception ex){
-        String methodName = jp.getSignature().getName();
-//        Long id = (Long) jp.getArgs()[0];
-        log.info("AfterThrowing -> TimesheetService#{} -> {}", methodName, ex.getClass().getName());
+        log.info("AfterThrowing -> TimesheetService#{} -> {}", jp.getSignature().getName(), ex.getClass().getName());
     }
-
-
 }

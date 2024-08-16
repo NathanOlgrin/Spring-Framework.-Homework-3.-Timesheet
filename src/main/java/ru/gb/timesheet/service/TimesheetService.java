@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Service  // тоже самое, что и Component
-@Timer(level = Level.TRACE)
 public class TimesheetService {
     private final TimesheetRepository repository;
 
